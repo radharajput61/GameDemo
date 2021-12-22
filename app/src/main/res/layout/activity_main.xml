@@ -46,7 +46,14 @@
                     android:visibility="gone"
                     android:orientation="vertical"
                     android:id="@+id/red_gray"
-                    android:layout_height="match_parent"></LinearLayout>
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_red"
+                        android:textColor="#BCBBBB"
+                        android:text="0"/>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -62,7 +69,14 @@
                     android:background="#BCBBBB"
                     android:visibility="gone"
                 android:id="@+id/blue_gray"
-                    android:layout_height="match_parent"></LinearLayout>
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_blue"
+                        android:textColor="#BCBBBB"
+                        android:text="0"/>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -85,7 +99,14 @@
                     android:background="#BCBBBB"
                     android:visibility="gone"
 android:id="@+id/yellow_gray"
-                    android:layout_height="match_parent"></LinearLayout>
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_yellow"
+                        android:textColor="#BCBBBB"
+                        android:text="0"/>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -100,7 +121,15 @@ android:id="@+id/yellow_gray"
                     android:background="#BCBBBB"
                     android:visibility="gone"
                     android:id="@+id/green_gray"
-                    android:layout_height="match_parent"></LinearLayout>
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_green"
+                        android:textColor="#BCBBBB"
+                        android:text="0"/>
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

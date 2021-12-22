@@ -22,12 +22,13 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 LinearLayout red_gray,blue_gray,yellow_gray,green_gray;
 LinearLayout red,blue,yellow,green;
-TextView score,tv_red,tv_blue;
+TextView score,tv_red,tv_blue,tv_yellow,tv_green;
 private LinearLayout[] layouts = { red_gray, blue_gray, yellow_gray, green_gray};
 
 private LinearLayout[] Parentlayouts = { red, blue, yellow, green};
+private TextView[] txv = { tv_red, tv_blue, tv_yellow, tv_green};
 
-int rndIndex=0,score_count=0,click_count=0;
+int rndIndex=0,score_count=0,click_count,service_time=1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,11 @@ int rndIndex=0,score_count=0,click_count=0;
         yellow=findViewById(R.id.yellow);
         green=findViewById(R.id.green);
 
+        tv_red=findViewById(R.id.tv_red);
+        tv_blue=findViewById(R.id.tv_blue);
+        tv_yellow=findViewById(R.id.tv_yellow);
+        tv_green=findViewById(R.id.tv_green);
+
 
 layouts[0]=red_gray;
 layouts[1]=blue_gray;
@@ -54,8 +60,14 @@ layouts[3]=green_gray;
         Parentlayouts[2]=yellow;
         Parentlayouts[3]=green;
 
+        txv[0]=tv_red;
+        txv[1]=tv_blue;
+        txv[2]=tv_yellow;
+        txv[3]=tv_green;
+
 for (int i=0;i<Parentlayouts.length;i++)
 {
+
     Parentlayouts[i].setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -64,6 +76,8 @@ for (int i=0;i<Parentlayouts.length;i++)
     });
 
 }
+
+
 for (int i=0;i<layouts.length;i++)
 {
     layouts[i].setOnClickListener(new View.OnClickListener() {
@@ -72,8 +86,14 @@ for (int i=0;i<layouts.length;i++)
             click_count=1;
             score_count=Integer.parseInt(score.getText().toString());
             score.setText(String.valueOf(score_count+1));
+
+            tv_red.setText("1");
+            tv_blue.setText("1");
+            tv_yellow.setText("1");
+            tv_green.setText("1");
         }
     });
+
 }
 
 
@@ -91,13 +111,27 @@ for (int i=0;i<layouts.length;i++)
                         rndIndex = random.nextInt(layouts.length);
                         layouts[rndIndex].setVisibility(View.VISIBLE);
                         Log.e("index",rndIndex+"");
+if (txv[rndIndex].getText().toString().equals("0"))
+{
+    GameOverDialog();
+    tv_red.setText("1");
+    tv_blue.setText("1");
+    tv_yellow.setText("1");
+    tv_green.setText("1");
+}else {
 
+    tv_red.setText("0");
+    tv_blue.setText("0");
+    tv_yellow.setText("0");
+    tv_green.setText("0");
+}
+                        service_time=1000;
                         // Do some stuff
                     }
                 });
 
             }
-        }, 0, 1000);//put here time 1000 milliseconds=1 second
+        }, 0, service_time);//put here time 1000 milliseconds=1 second
 //
 //        Thread thread = new Thread() {
 //            @Override
@@ -144,8 +178,12 @@ for (int i=0;i<layouts.length;i++)
             public void onClick(View view) {
 
                 dialog.dismiss();
-               score.setText("0");
 
+               score.setText("0");
+                tv_red.setText("0");
+                tv_blue.setText("0");
+                tv_yellow.setText("0");
+                tv_green.setText("0");
             }
 
         });
