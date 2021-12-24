@@ -28,7 +28,7 @@ private LinearLayout[] layouts = { red_gray, blue_gray, yellow_gray, green_gray}
 private LinearLayout[] Parentlayouts = { red, blue, yellow, green};
 private TextView[] txv = { tv_red, tv_blue, tv_yellow, tv_green};
 
-int rndIndex=0,score_count=0,click_count,service_time=1000;
+int rndIndex=0,score_count=0,click_count=0,thread=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,11 +113,21 @@ for (int i=0;i<layouts.length;i++)
                         Log.e("index",rndIndex+"");
 if (txv[rndIndex].getText().toString().equals("0"))
 {
-    GameOverDialog();
-    tv_red.setText("1");
-    tv_blue.setText("1");
-    tv_yellow.setText("1");
-    tv_green.setText("1");
+    if (click_count==1) {
+        GameOverDialog();
+        tv_red.setText("1");
+        tv_blue.setText("1");
+        tv_yellow.setText("1");
+        tv_green.setText("1");
+    }else
+    {
+        thread++;
+       Log.e("thread",thread+"");
+        if (thread>4)
+        {
+            GameOverDialog();
+        }
+    }
 }else {
 
     tv_red.setText("0");
@@ -125,13 +135,12 @@ if (txv[rndIndex].getText().toString().equals("0"))
     tv_yellow.setText("0");
     tv_green.setText("0");
 }
-                        service_time=1000;
-                        // Do some stuff
+
                     }
                 });
 
             }
-        }, 0, service_time);//put here time 1000 milliseconds=1 second
+        }, 0, 3000);//put here time 1000 milliseconds=1 second
 //
 //        Thread thread = new Thread() {
 //            @Override
