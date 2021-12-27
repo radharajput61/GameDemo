@@ -21,7 +21,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 LinearLayout red_gray,blue_gray,yellow_gray,green_gray;
-LinearLayout red,blue,yellow,green;
+LinearLayout red,blue,yellow,green,re_start;
 TextView score,tv_red,tv_blue,tv_yellow,tv_green;
 private LinearLayout[] layouts = { red_gray, blue_gray, yellow_gray, green_gray};
 
@@ -49,6 +49,17 @@ int rndIndex=0,score_count=0,click_count=0,thread=0;
         tv_yellow=findViewById(R.id.tv_yellow);
         tv_green=findViewById(R.id.tv_green);
 
+        re_start=findViewById(R.id.re_start);
+        re_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                score.setText("0");
+                tv_red.setText("0");
+                tv_blue.setText("0");
+                tv_yellow.setText("0");
+                tv_green.setText("0");
+            }
+        });
 
 layouts[0]=red_gray;
 layouts[1]=blue_gray;
@@ -101,6 +112,12 @@ for (int i=0;i<layouts.length;i++)
             @Override
             public void run() {
                 //your method
+                try {
+                    Thread.sleep(3000);
+                    // Do some stuff
+                } catch (Exception e) {
+                    e.getLocalizedMessage();
+                }
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -108,7 +125,14 @@ for (int i=0;i<layouts.length;i++)
 
                         layouts[rndIndex].setVisibility(View.GONE);
                         Random random = new Random();
+
+                        int previousIndex = rndIndex;
                         rndIndex = random.nextInt(layouts.length);
+
+                        while (rndIndex == previousIndex)
+                        {
+                            rndIndex = random.nextInt(layouts.length);
+                        }
                         layouts[rndIndex].setVisibility(View.VISIBLE);
                         Log.e("index",rndIndex+"");
 if (txv[rndIndex].getText().toString().equals("0"))
@@ -140,28 +164,8 @@ if (txv[rndIndex].getText().toString().equals("0"))
                 });
 
             }
-        }, 0, 3000);//put here time 1000 milliseconds=1 second
-//
-//        Thread thread = new Thread() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Thread.sleep(3000);
-//                } catch (InterruptedException e) {
-//                }
-//
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//
-//                        // Do some stuff
-//                    }
-//                });
-//            }
-//        };
-//        thread.start(); //start the thread
-//
+        }, 0, 2000);//put here time 1000 milliseconds=1 second
+
   }
 
 
